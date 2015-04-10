@@ -96,7 +96,14 @@ class QuickCalc {
         return Double(rawPeriod)/Double(factor)
     }
     func solveRatePercentage(option:VestingOption) -> Double {
-        return 0.0
+        var rate:Double = 0.1
+        var rateInc:Double = 0.1
+        var calc1 = QuickCalc(initialAmountValue: initialAmount, periodicalAmountValue: periodicalAmount, targetAmountValue: 0.0, ratePercentageValue: rate, inflationPercentageValue: inflationPercentage, vestingPeriodValue: vestingPeriod)
+        while calc1.solveTargetAmount(option) < targetAmount {
+            rate+=rateInc;
+            calc1 = QuickCalc(initialAmountValue: initialAmount, periodicalAmountValue: periodicalAmount, targetAmountValue: 0.0, ratePercentageValue: rate, inflationPercentageValue: inflationPercentage, vestingPeriodValue: vestingPeriod)
+        }
+        return rate
     }
 }
 
