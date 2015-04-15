@@ -55,7 +55,8 @@ class QuickCalc {
         return compound+accumulatedInstallment
     }
     func solvePeriodicalAmount(option:VestingOption) -> Double{
-        var calc0 = QuickCalc(initialAmount: self.initialAmount, periodicalAmount: 0, targetAmount: 0, ratePercentage: self.ratePercentage, inflationPercentage: self.inflationPercentage, vestingPeriod: self.vestingPeriod)
+        var calc0 = QuickCalc(initialAmount: self.initialAmount, periodicalAmount: 0, targetAmount: 0, ratePercentage: self.ratePercentage, inflationPercentage: self.inflationPercentage, vestingPeriod: self.vestingPeriod, taxRatePercentage:self.taxRatePercentage
+        )
         var compound:Double = calc0.solveTargetAmount(option)
         var factor = getFactor(option)
         var newRatePercentage = ratePercentage / Double(factor)
@@ -72,7 +73,7 @@ class QuickCalc {
         return (targetAmount-compound)/gain*Double(factor)
     }
     func solveInitialAmount(option:VestingOption) -> Double {
-        var calc0 = QuickCalc(initialAmount: 0, periodicalAmount: self.periodicalAmount, targetAmount: 0, ratePercentage: self.ratePercentage, inflationPercentage: self.inflationPercentage, vestingPeriod: self.vestingPeriod)
+        var calc0 = QuickCalc(initialAmount: 0, periodicalAmount: self.periodicalAmount, targetAmount: 0, ratePercentage: self.ratePercentage, inflationPercentage: self.inflationPercentage, vestingPeriod: self.vestingPeriod,taxRatePercentage:self.taxRatePercentage)
         var accumulatedInstallment:Double = calc0.solveTargetAmount(option)
         var factor = getFactor(option)
         var newRatePercentage = ratePercentage / Double(factor)
